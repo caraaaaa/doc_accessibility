@@ -1,3 +1,4 @@
+
 # Offline Document Asseessbility (PDF)
 
 ### Target Document
@@ -63,7 +64,7 @@ A pre-trained model to identify if an image (such as JPG or PNG) primarily conta
 - fastai
 - A pre-trained model file for image classification `model/imageOfText_classifier.pkl`
 ### Data Collection and Model Training
-- [Google Colab](https://colab.research.google.com/drive/1QYvXdi0V1AXqlBMR8MpyydNMnK_Vt4dU?usp=sharing)
+- [Google Colab](https://colab.research.google.com/drive/18ZZ99ZtyYH6SVsqaDlc3w9VwFjjC7aoE?usp=sharing)
 
 ### Inference
 ```
