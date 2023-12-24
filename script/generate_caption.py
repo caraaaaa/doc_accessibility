@@ -21,8 +21,8 @@ def generate_caption(img_path):
     image = Image.open(img_path).convert('RGB')
 
     # load model and processor
-    processor = AutoProcessor.from_pretrained("microsoft/git-base")
-    model = AutoModelForCausalLM.from_pretrained('model/finetuned_image_captioning', local_files_only=True)
+    model = AutoModelForCausalLM.from_pretrained("Caraaaaa/text_image_captioning")
+    processor = AutoProcessor.from_pretrained("Caraaaaa/text_image_captioning")
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
     model.to(device)

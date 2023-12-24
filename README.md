@@ -75,13 +75,13 @@ python script/image_of_text.py <input_image_path> [--show_score]
 A pre-trained transformer model to analyze the content of an image and produce a descriptive caption. 
 ### Prerequisites
 - Transformers library by Hugging Face
-- A pre-trained model `model/finetuned_image_captioning`
 
 ### Data Collection
 - Non-text images collected from existing PDF with manual captioning: [Caraaaaa/non_text_image_captioning](https://huggingface.co/datasets/Caraaaaa/non_text_image_captioning) 
 
 ### Model Training
 - [Google Colab](https://colab.research.google.com/drive/1QYvXdi0V1AXqlBMR8MpyydNMnK_Vt4dU?usp=sharing)
+- [Trained Model](https://huggingface.co/Caraaaaa/text_image_captioning)
 ### Inference
 ```
 python script/generate_caption.py <input_image_path>
@@ -93,7 +93,6 @@ Analyze the line spacing in a *searchable PDF* and flags any discrepancies that 
 Basic usage:
 ```
 python script/line_spacing.py <input_pdf_path>
-
 ```
 
 ## Text Representation - Text Constrast  
@@ -114,6 +113,7 @@ python script/synthetic_text_seg.py --output_folder <output_image_directory> --f
 
 ### Model Training - Image Segmentation (Text)
 - [Google Colab](https://colab.research.google.com/drive/1_TSeRlUyB8-clkU3-rGBvxiUERcN78XT?usp=sharing)
+- [Trained Model](https://huggingface.co/Caraaaaa/image_segmentation_text)
 
 ### Inference
 ```mermaid
