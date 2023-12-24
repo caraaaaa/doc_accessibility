@@ -8,14 +8,14 @@
 
 ### Prerequisites
 - Python 3.x
-- PyMuPDF (fitz)
+- PyMuPDF
 - Pytesseract
 - pdf2image
 - PyPDF2
 - pdfminer
 - PIL (Python Imaging Library)
-- OpenCV (cv2)
-- Tesseract OCR (See Tesseract GitHub for installation)
+- OpenCV
+- Tesseract OCR
 
 ### WCAG Accessibility Issues Covered
 - **Images**: non-text image (i.e. icon, header), image of text
@@ -100,6 +100,10 @@ python script/line_spacing.py <input_pdf_path>
 
 Identify low contrast text in a *searchable PDF*  using image segmentation and contrast ratio analysis
 
+### Prerequisites
+- Transformers library by Hugging Face
+- A directory of .ttf font files for text generation `font`
+
 ### Data Collection
 Synthetic image of text with segmentation mask [Caraaaaa/synthetic_image_text](https://huggingface.co/datasets/Caraaaaa/synthetic_image_text) 
 
@@ -108,8 +112,6 @@ To generate synthetic image of text:
 ```
 python script/synthetic_text_seg.py --output_folder <output_image_directory> --font_folder <font_directory>
 ```
-##### Prerequisites
-- A directory of .ttf font files for text generation `font`
 
 ### Model Training - Image Segmentation (Text)
 - [Google Colab](https://colab.research.google.com/drive/1_TSeRlUyB8-clkU3-rGBvxiUERcN78XT?usp=sharing)
