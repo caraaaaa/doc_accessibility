@@ -130,7 +130,6 @@ python script/contrast_PDF.py <input_pdf_path>
 With Option:
 ```
 python script/contrast_PDF.py <input_pdf_path> [--output_bbox_img] [--output_dir <output_directory>] [--draw_bbox] [--output_pdf_path <output_pdf_path>] [--bbox_extractor <PyMyPDF|pdfminer>]
-
 ```
 ##### Extract text bounding boxes (PDFMiner)
 ```
