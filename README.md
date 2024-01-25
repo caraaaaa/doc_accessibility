@@ -11,22 +11,16 @@ Here provide a solution to help disabilities have equal access to documents. A P
 - Searchable PDF
 - Potentially some images
 
-### Prerequisites
-- Python 3.x
-- PyMuPDF
-- Pytesseract
-- pdf2image
-- PyPDF2
-- pdfminer
-- PIL (Python Imaging Library)
-- OpenCV
-- Tesseract OCR
-
 ### WCAG Accessibility Issues Covered
 - **Images**: non-text image (i.e. icon, header), image of text
 - **Text Presentation**: line spacing, text-background contrast
 - **Language**: language of page, language of parts
 
+## Installation Instructions (TODO)
+...
+
+
+## Usage Instructions
 ## Searchable PDF Creator
 Convert scanned PDF document to searchable PDF file.
 
