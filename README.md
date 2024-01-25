@@ -1,6 +1,11 @@
 
 # Offline Document Asseessbility (PDF)
 
+## Background
+According to a study by the National Center for Learning Disabilities, asynchronous learning materials such as textbooks, handouts, and digital documents that are not created with accessibility in mind can pose serious challenges to students with disabilities.
+
+Here provide a solution to help disabilities have equal access to documents. A Python CLI tool to detect and fix some WCAG accessibility issues in offline documents.
+
 ### Target Document
 - Scanned PDF
 - Searchable PDF
