@@ -2,9 +2,9 @@
 # Offline Document Asseessbility (PDF)
 
 ## Background
-According to a study by the National Center for Learning Disabilities, asynchronous learning materials such as textbooks, handouts, and digital documents that are not created with accessibility in mind can pose serious challenges to students with disabilities.
+Document accessibility ensures equal access to information for everyone, regardless of their abilities. It not only helps foster a more inclusive society but is also an ethical responsibility to respect diverse audience needs. Besides, investing in document accessibility can benefit businesses by expanding their audience and demonstrating a commitment to ethical practices and social responsibility.
 
-Here provide a solution to help disabilities have equal access to documents. A Python CLI tool to detect and fix some WCAG accessibility issues in offline documents.
+Here is a Python CLI tool designed to detect and address [WCAG](https://www.w3.org/WAI/standards-guidelines/wcag/) accessibility issues identified in offline documents. It aims to promote a user-friendly experience for everyone and enables users to access documents with assistive technology.
 
 ### Target Document
 - Scanned PDF
