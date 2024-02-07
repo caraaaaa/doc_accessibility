@@ -1,0 +1,13 @@
+.DS_Store
+*.ipynb
+*.pptx
+*.ttf
+*.csv
+
+non_text_image/
+non_text_image/*
+sample_image/
+sample_image/*
+sample_pdf/
+sample_pdf/*
+Machine Learning Engineer Challenge.pdf
