@@ -11,16 +11,22 @@ Here is a Python CLI tool designed to detect and address [WCAG](https://www.w3.o
 
 ## Features
 - [Searchable PDF Creator](#searchable-pdf-creator)
-- TBC...
-
-
+- [Text Alternatives for Non-text Content](#text-alternatives-for-non-text-content)
+    - [Identify Non-text Content](#identify-non-text-content)
+    - Generate Description for Non-text Content
+        - Classify image-of-text and non-text-image
+        - Image Captioning
+        - OCR
+- Text Representation
+    - Line Space
+    - Text Constrast
 
 
 
 ## Searchable PDF Creator
 Convert scanned PDF document to searchable format using **TesseractOCR**.
 
-**Intent:** To allow user read or extract the words using assistive technologies, or manipulate the PDF for accessibility.
+**Intent:** To allow user read or extract the words using assistive technologies, or manipulate the PDF for accessibility. [More detail](https://www.w3.org/WAI/WCAG22/Understanding/images-of-text)
 
 |     Scanned PDF     |  Searchable PDF   |
 | ------------------- | ----------------- |
@@ -45,10 +51,10 @@ optional arguments:
 </details>
 
 
+## Text Alternatives for Non-text Content
+**Intent**: To providing alternative descriptions for images, formulas, and other items that do not translate naturally into text. [More detail](https://www.w3.org/WAI/WCAG22/Understanding/text-alternatives)
 
-## Process PDF Images
-Process images inside a *searchable PDF*
-
+**Overview**
 ```mermaid
 flowchart LR
     A[Extract Images] -->|Optional| B[Save Images]
@@ -60,16 +66,47 @@ flowchart LR
     G --> H
     H -->|Optional| I[Output PDF with Bounding Box]
 ```
-Basic usage:
-```
-python script/extract_PDF_image.py <input_pdf_path>
-```
-With optional output image and PDF with bounding box:
-```
-python script/extract_PDF_image.py <input_pdf_path> [--output_img] [--output_folder <folder_name>] [--draw_bbox] [--output_pdf_path <output_pdf_name>]
-```
+<details>
+  <summary>Usage Instruction</summary>
 
-### PDF Images - Image of Text Classifier 
+```PowerShell
+python script/extract_PDF_image.py [-h] [--output_img] [--output_folder OUTPUT_FOLDER] [--draw_bbox] [--output_pdf_path OUTPUT_PDF_PATH] [--captioning] input_pdf_path
+```
+```PowerShell
+optional arguments:
+  --output_img          Output images extracted from the PDF.
+  --output_folder OUTPUT_FOLDER
+                        The directory for the output images.
+  --draw_bbox           Output PDF with bounding box on images.
+  --output_pdf_path OUTPUT_PDF_PATH
+                        The path for the output PDF file with bounding box.
+  --captioning          Generate caption for images.
+```
+</details>
+
+
+
+## Identify Non-text Content
+*Part of [Text Alternatives for Non-text Content](#text-alternatives-for-non-text-content)*
+
+Identify images without [alt text](https://www.w3.org/WAI/WCAG22/Understanding/non-text-content#dfn-text-alternative) inside searchable PDF using **PyMuPDF** and **Pillow**.
+
+
+| ![](resources/pdf_image.png) | ![](resources/pdf_image_bbox.png)| 
+| ------------------- | ----------------- |
+
+<details>
+  <summary>Usage Instruction</summary>
+
+```PowerShell
+python script/extract_PDF_image.py --draw_bbox input_pdf_path
+```
+Default output path: `bbox_image.pdf` 
+</details>
+
+## Image of Text Classifier 
+*Part of [Text Alternatives for Non-text Content](#text-alternatives-for-non-text-content)*
+
 A pre-trained model to identify if an image (such as JPG or PNG) primarily contains text
 #### Prerequisites
 - fastai
@@ -82,7 +119,10 @@ A pre-trained model to identify if an image (such as JPG or PNG) primarily conta
 python script/image_of_text.py <input_image_path> [--show_score]
 ```
 
-### PDF Images - Image Captioning
+
+## Image Captioning
+*Part of [Text Alternatives for Non-text Content](#text-alternatives-for-non-text-content)*
+
 A pre-trained transformer model to analyze the content of an image and produce a descriptive caption. 
 #### Prerequisites
 - Transformers library by Hugging Face
@@ -98,17 +138,7 @@ A pre-trained transformer model to analyze the content of an image and produce a
 python script/generate_caption.py <input_image_path>
 ```
 
-### Text Representation - Line Spacing
-Analyze the line spacing in a *searchable PDF* and flags any discrepancies that might affect readability
-
-Basic usage:
-```
-python script/line_spacing.py <input_pdf_path>
-```
-
-### Text Representation - Text Constrast  
-
-
+## Text Representation - Text Constrast  
 Identify low contrast text in a *searchable PDF*  using image segmentation and contrast ratio analysis
 
 #### Prerequisites
@@ -153,8 +183,16 @@ python script/extract_text_bbox_PDFminer.py <input_pdf_path> [--output_pdf_path 
 python script/extract_text_bbox_PyMyPDF.py <input_pdf_path> [--output_pdf_path <output_pdf_path>] [--text_img] [--output_dir <output_image_directory>]
 ```
 
+## Text Representation - Line Spacing
+Analyze the line spacing in a *searchable PDF* and flags any discrepancies that might affect readability
 
-### PDF Language Detection
+Basic usage:
+```
+python script/line_spacing.py <input_pdf_path>
+```
+
+
+## PDF Language Detection
 - **Metadata Language Check**: Examines the PDF's metadata for a specified language property.
 - **Text-Based Language Detection**: Analyzes the text on each page to detect its language.
 - **Support for Multi-Language Documents**: Identifies cases where multiple languages are present in the same document.

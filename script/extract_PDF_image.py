@@ -9,7 +9,6 @@ from generate_caption import generate_caption
 
 output_folder='pdf_image'
 output_pdf_path='image_bbox.pdf'
-#input_pdf_path='/Users/cara.t/Desktop/assebility/sample/Authorization-of-Information-Release.pdf'
 
 parser = argparse.ArgumentParser(description="Extract and process images from a PDF file.")
 parser.add_argument('input_pdf_path', type=str, help="The path or directory to the input PDF file.")
@@ -17,6 +16,7 @@ parser.add_argument("--output_img", action="store_true", help="Output images ext
 parser.add_argument('--output_folder', type=str, help="The directory for the output images.", default=output_folder)
 parser.add_argument("--draw_bbox", action="store_true", help="Output PDF with bounding box on images.")
 parser.add_argument('--output_pdf_path', type=str, help="The path for the output PDF file with bounding box.", default=output_pdf_path)
+parser.add_argument('--captioning', action="store_true", help="Generate caption for images.")
 
 
 def find_alt_text(doc, img):
@@ -71,7 +71,8 @@ def get_image_object(image, doc, output_folder='pdf_image', output_img=False):
 
 def find_non_text_content(input_pdf_path, 
                           output_img=True, output_folder='pdf_image',
-                          draw_bbox=False, output_pdf_path='bbox_image.pdf'):
+                          draw_bbox=False, output_pdf_path='bbox_image.pdf',
+                          captioning=False):
     """
     Processes images in a PDF to find non-text content, performing OCR or image captioning.
     """
@@ -96,23 +97,24 @@ def find_non_text_content(input_pdf_path,
             # Check for alternative text for the image
             alt_text = find_alt_text(doc, img)
 
-            if os.path.exists(img_path):
-                # Classify the image as text or non-text
-                isText = is_image_of_text(img_path)
+            if captioning:
+                if os.path.exists(img_path):
+                    # Classify the image as text or non-text
+                    isText = is_image_of_text(img_path)
 
-                if isText:
-                    # Perform OCR if it's an image of text
-                    print(f"File is an image of text")
-                    image_caption = perform_ORC(img_path)
-                    print(f'ORC of the image: {image_caption}')
+                    if isText:
+                        # Perform OCR if it's an image of text
+                        print(f"File is an image of text")
+                        image_caption = perform_ORC(img_path)
+                        print(f'ORC of the image: {image_caption}')
+                    else:
+                        # Perform image captioning if it's a non-text image
+                        print(f"File is not an image of text")
+                        image_caption = generate_caption(img_path)
+                        print(f'Image Captioning: {image_caption}')
                 else:
-                    # Perform image captioning if it's a non-text image
-                    print(f"File is not an image of text")
-                    image_caption = generate_caption(img_path)
-                    print(f'Image Captioning: {image_caption}')
-            else:
-                print("Filepath to the images doesn't exists")
-                print("Output images to perform classification and ORC/image captioning.")
+                    print("Filepath to the images doesn't exists")
+                    print("Output images to perform classification and ORC/image captioning.")
 
             # Draw bounding box on the PDF for images without alt text
             if not alt_text and draw_bbox:
@@ -136,8 +138,10 @@ if __name__ == "__main__":
             if Path(filepath).suffix == '.pdf':
                     find_non_text_content(filepath, 
                             output_img=args.output_img, output_folder=args.output_folder,
-                            draw_bbox=args.draw_bbox, output_pdf_path=args.output_pdf_path)
+                            draw_bbox=args.draw_bbox, output_pdf_path=args.output_pdf_path,
+                            captioning=args.captioning)
     else:
         find_non_text_content(args.input_pdf_path, 
                             output_img=args.output_img, output_folder=args.output_folder,
-                            draw_bbox=args.draw_bbox, output_pdf_path=args.output_pdf_path)
+                            draw_bbox=args.draw_bbox, output_pdf_path=args.output_pdf_path,
+                            captioning=args.captioning)
