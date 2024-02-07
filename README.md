@@ -1,23 +1,27 @@
 
 # Offline Document Asseessbility (PDF)
 
-## Background
+
 Document accessibility ensures equal access to information for everyone, regardless of their abilities. It not only helps foster a more inclusive society but is also an ethical responsibility to respect diverse audience needs. Besides, investing in document accessibility can benefit businesses by expanding their audience and demonstrating a commitment to ethical practices and social responsibility.
 
 Here is a Python CLI tool designed to detect and address [WCAG](https://www.w3.org/WAI/standards-guidelines/wcag/) accessibility issues identified in offline documents, targeting PDF. It aims to promote a user-friendly experience for everyone and enables users to access documents with [assistive technology](https://www.w3.org/WAI/WCAG22/Understanding/text-spacing.html#dfn-assistive-technology).
 
+## Installation (TODO)
+...
 
-### Table of Content
+## Features
 - [Searchable PDF Creator](#searchable-pdf-creator)
 - TBC...
 
 
-## Installation Instructions (TODO)
-...
+
 
 
 ## Searchable PDF Creator
-Convert scanned PDF document to searchable PDF file.
+Convert scanned PDF document to searchable format using **TesseractOCR**.
+
+**Intent:** To allow user read or extract the words using assistive technologies, or manipulate the PDF for accessibility.
+
 <style>
 td, th {
    border: none!important;
@@ -26,20 +30,24 @@ td, th {
 
 |     Scanned PDF     |  Searchable PDF   |
 | ------------------- | ----------------- |
-| ![](before_OCR.png) | ![](after_OCR.png)| 
+| ![](resources/before_OCR.png) | ![](resources/after_OCR.png)| 
 
 
 <details>
   <summary>Usage Instruction</summary>
 
-```
-python script/scanned2searchable.py <input_pdf_path>
-```
-With optional output path and text printing:
-```
-python script/scanned2searchable.py <input_pdf_path> -o <output_pdf_path> --show_result
+```PowerShell
+python script/scanned2searchable.py [-h] [-o OUTPUT_PDF_PATH] [-s] input_pdf_path
 ```
 Default output path: `readable_pdf.pdf` 
+
+```PowerShell
+optional arguments:
+  -o OUTPUT_PDF_PATH, --output_pdf_path OUTPUT_PDF_PATH
+                        The path for the output searchable PDF file.
+  -s, --show_result     Show text of the searchable PDF after OCR
+```
+
 </details>
 
 
