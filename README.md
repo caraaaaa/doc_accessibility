@@ -18,8 +18,8 @@ Here is a Python CLI tool designed to detect and address [WCAG](https://www.w3.o
         - [Image Captioning](#image-captioning)
         - [OCR](#ocr)
 - Text Representation
-    - Line Space
-    - Text Constrast
+    - [Text Constrast](#text-constrast)
+    - [Line Space](#line-spacing)
 
 
 
@@ -202,38 +202,54 @@ flowchart LR
 <details>
   <summary>Usage Instruction</summary>
 
-
-To generate synthetic image of text:
-
+- Generate synthetic image of text
+```PowerShell
+python script/synthetic_text_seg.py [--output_folder OUTPUT_FOLDER] [--font_folder FONT_FOLDER]
 ```
-python script/synthetic_text_seg.py --output_folder <output_image_directory> --font_folder <font_directory>
+- Identify low contrast text
+```PowerShell
+python script/contrast_pdf.py [--output_bbox_img] [--output_dir OUTPUT_DIR] [--draw_bbox] [--output_pdf_path OUTPUT_PDF_PATH] [--bbox_extractor {PyMyPDF,pdfminer}] input_pdf_path
 ```
-
-Basic usage:
+```PowerShell
+optional arguments:
+  --output_bbox_img     Option to save text block images with low contrast.
+  --output_dir OUTPUT_DIR
+                        The directory for output images.
+  --draw_bbox           Option to draw bounding boxes on low contrast text blocks.
+  --output_pdf_path OUTPUT_PDF_PATH
+                        The path for the output PDF file with drawn bounding boxes.
+  --bbox_extractor {PyMyPDF,pdfminer}
+                        Choice of bounding box extractor.
 ```
-python script/contrast_PDF.py <input_pdf_path>
+- Extract text bounding boxes (PDFMiner)
+```PowerShell
+python script/extract_text_bbox_PDFminer.py [--output_pdf_path OUTPUT_PDF_PATH] input_pdf_path
 ```
-With Option:
-```
-python script/contrast_PDF.py <input_pdf_path> [--output_bbox_img] [--output_dir <output_directory>] [--draw_bbox] [--output_pdf_path <output_pdf_path>] [--bbox_extractor <PyMyPDF|pdfminer>]
-```
-##### Extract text bounding boxes (PDFMiner)
-```
-python script/extract_text_bbox_PDFminer.py <input_pdf_path> [--output_pdf_path <output_pdf_path>]
-```
-##### Extract text bounding boxes (PyMuPDF)
-```
-python script/extract_text_bbox_PyMyPDF.py <input_pdf_path> [--output_pdf_path <output_pdf_path>] [--text_img] [--output_dir <output_image_directory>]
+- Extract text bounding boxes (PyMuPDF)
+```PowerShell
+python script/extract_text_bbox_PyMuPDF.py [--output_pdf_path OUTPUT_PDF_PATH] [--text_img] [--output_dir OUTPUT_DIR] input_pdf_path
 ```
 </details>
 
 ## Line Spacing
 Analyze the line spacing in a *searchable PDF* and flags any discrepancies that might affect readability
 
-Basic usage:
+<details>
+  <summary>Usage Instruction</summary>
+
 ```
-python script/line_spacing.py <input_pdf_path>
+python script/line_spacing.py input_pdf_path
 ```
+</details>
+
+## WCAG Accessibility Issues Covered
+
+- **Images**: non-text image (i.e. icon, header), image of text
+- **Text Presentation**: line spacing, text-background contrast
+- **Language**: language of page, language of parts
+
+<details>
+  <summary>Other features</summary>
 
 ## PDF Language Detection
 - **Metadata Language Check**: Examines the PDF's metadata for a specified language property.
@@ -246,9 +262,4 @@ Basic usage:
 ```
 python script/language_detection.py <input_pdf_path>
 ```
-
-### WCAG Accessibility Issues Covered
-
-- **Images**: non-text image (i.e. icon, header), image of text
-- **Text Presentation**: line spacing, text-background contrast
-- **Language**: language of page, language of parts
+</details>
