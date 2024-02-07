@@ -37,7 +37,7 @@ Convert scanned PDF document to searchable format using **TesseractOCR**.
   <summary>Usage Instruction</summary>
 
 ```PowerShell
-python script/scanned2searchable.py [-h] [-o OUTPUT_PDF_PATH] [-s] input_pdf_path
+python script/scanned2searchable.py [-o OUTPUT_PDF_PATH] [-s] input_pdf_path
 ```
 Default output path: `readable_pdf.pdf` 
 
@@ -52,7 +52,7 @@ optional arguments:
 
 
 ## Text Alternatives for Non-text Content
-**Intent**: To providing alternative descriptions for images, formulas, and other items that do not translate naturally into text. [More detail](https://www.w3.org/WAI/WCAG22/Understanding/text-alternatives)
+Provide alternative descriptions for images, formulas, and other items that do not translate naturally into text. [More detail](https://www.w3.org/WAI/WCAG22/Understanding/text-alternatives)
 
 **Overview**
 ```mermaid
@@ -70,7 +70,7 @@ flowchart LR
   <summary>Usage Instruction</summary>
 
 ```PowerShell
-python script/extract_PDF_image.py [-h] [--output_img] [--output_folder OUTPUT_FOLDER] [--draw_bbox] [--output_pdf_path OUTPUT_PDF_PATH] [--captioning] input_pdf_path
+python script/extract_PDF_image.py [--output_img] [--output_folder OUTPUT_FOLDER] [--draw_bbox] [--output_pdf_path OUTPUT_PDF_PATH] [--captioning] input_pdf_path
 ```
 ```PowerShell
 optional arguments:
@@ -107,7 +107,7 @@ Default output path: `bbox_image.pdf`
 ## Image of Text Classifier 
 *Part of [Text Alternatives for Non-text Content](#text-alternatives-for-non-text-content)*
 
-Classifiy if an image (such as JPG or PNG) primarily contains text before performing OCR/ image captioning. 
+Classifiy if an image (such as JPG or PNG) primarily contains text before performing [OCR](#ocr) or [image captioning](#image-captioning). 
 
 |     Image of Text     |  Non-text image   |
 | ------------------- | ----------------- |
@@ -125,7 +125,7 @@ Classifiy if an image (such as JPG or PNG) primarily contains text before perfor
   <summary>Usage Instruction</summary>
 
 ```Shell
-python script/image_of_text.py [-h] [--show_score] input_pdf_path
+python script/image_of_text.py [--show_score] input_pdf_path
 ```
 </details>
 
@@ -194,7 +194,7 @@ flowchart LR
     - [Dataset Card](https://huggingface.co/datasets/Caraaaaa/synthetic_image_text)
 - **Model:**
     - Pre-trained: [SegFormer](https://huggingface.co/nvidia/mit-b0) 
-    - Fined-tuned: [model card and inference API](https://huggingface.co/Caraaaaa/image_segmentation_text)
+    - Fined-tuned: [model card](https://huggingface.co/Caraaaaa/image_segmentation_text)
 - **Tools:** HuggingFace Transformer, PyTorch
 - **Training Script:** [Google Colab](https://colab.research.google.com/drive/1_TSeRlUyB8-clkU3-rGBvxiUERcN78XT?usp=sharing)
 
