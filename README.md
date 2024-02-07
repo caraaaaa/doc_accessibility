@@ -107,17 +107,26 @@ Default output path: `bbox_image.pdf`
 ## Image of Text Classifier 
 *Part of [Text Alternatives for Non-text Content](#text-alternatives-for-non-text-content)*
 
-A pre-trained model to identify if an image (such as JPG or PNG) primarily contains text
-#### Prerequisites
-- fastai
-- A pre-trained model file for image classification `model/imageOfText_classifier.pkl`
-#### Data Collection and Model Training
-- [Google Colab](https://colab.research.google.com/drive/18ZZ99ZtyYH6SVsqaDlc3w9VwFjjC7aoE?usp=sharing)
+Classifiy if an image (such as JPG or PNG) primarily contains text before performing OCR/ image captioning. 
 
-#### Inference
+|     Image of Text     |  Non-text image   |
+| ------------------- | ----------------- |
+| ![](resources/image_of_text.png) | ![](resources/non_text_image.jpg)| 
+
+
+#### Fine-tuned a image classification model
+- Data: online-sourced image using fastai
+- Model: ResNet
+- Training Script: [Google Colab](https://colab.research.google.com/drive/18ZZ99ZtyYH6SVsqaDlc3w9VwFjjC7aoE?usp=sharing)
+
+
+<details>
+  <summary>Usage Instruction</summary>
+
+```Shell
+python script/image_of_text.py [-h] [--show_score] input_pdf_path
 ```
-python script/image_of_text.py <input_image_path> [--show_score]
-```
+</details>
 
 
 ## Image Captioning
@@ -133,10 +142,14 @@ A pre-trained transformer model to analyze the content of an image and produce a
 #### Model Training
 - [Google Colab](https://colab.research.google.com/drive/1QYvXdi0V1AXqlBMR8MpyydNMnK_Vt4dU?usp=sharing)
 - [Trained Model](https://huggingface.co/Caraaaaa/text_image_captioning)
-#### Inference
+
+<details>
+  <summary>Usage Instruction</summary>
+
 ```
 python script/generate_caption.py <input_image_path>
 ```
+</details>
 
 ## Text Representation - Text Constrast  
 Identify low contrast text in a *searchable PDF*  using image segmentation and contrast ratio analysis
@@ -158,6 +171,8 @@ python script/synthetic_text_seg.py --output_folder <output_image_directory> --f
 - [Google Colab](https://colab.research.google.com/drive/1_TSeRlUyB8-clkU3-rGBvxiUERcN78XT?usp=sharing)
 - [Trained Model](https://huggingface.co/Caraaaaa/image_segmentation_text)
 
+
+
 #### Inference
 ```mermaid
 flowchart LR
@@ -166,6 +181,10 @@ flowchart LR
     C --> D[Calculate contrast]
     D -->|Optional| E[Output PDF with Bounding Box]
 ```
+
+<details>
+  <summary>Usage Instruction</summary>
+
 Basic usage:
 ```
 python script/contrast_PDF.py <input_pdf_path>
@@ -182,6 +201,7 @@ python script/extract_text_bbox_PDFminer.py <input_pdf_path> [--output_pdf_path 
 ```
 python script/extract_text_bbox_PyMyPDF.py <input_pdf_path> [--output_pdf_path <output_pdf_path>] [--text_img] [--output_dir <output_image_directory>]
 ```
+</details>
 
 ## Text Representation - Line Spacing
 Analyze the line spacing in a *searchable PDF* and flags any discrepancies that might affect readability
@@ -190,7 +210,6 @@ Basic usage:
 ```
 python script/line_spacing.py <input_pdf_path>
 ```
-
 
 ## PDF Language Detection
 - **Metadata Language Check**: Examines the PDF's metadata for a specified language property.
