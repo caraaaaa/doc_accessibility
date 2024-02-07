@@ -115,9 +115,10 @@ Classifiy if an image (such as JPG or PNG) primarily contains text before perfor
 
 
 #### Fine-tuned a image classification model
-- Data: online-sourced image using fastai
-- Model: ResNet
-- Training Script: [Google Colab](https://colab.research.google.com/drive/18ZZ99ZtyYH6SVsqaDlc3w9VwFjjC7aoE?usp=sharing)
+- **Data:** online-sourced images
+- **Model:** ResNet
+- **Tools:** fastai
+- **Training Script:** [Google Colab](https://colab.research.google.com/drive/18ZZ99ZtyYH6SVsqaDlc3w9VwFjjC7aoE?usp=sharing)
 
 
 <details>
@@ -132,16 +133,22 @@ python script/image_of_text.py [-h] [--show_score] input_pdf_path
 ## Image Captioning
 *Part of [Text Alternatives for Non-text Content](#text-alternatives-for-non-text-content)*
 
-A pre-trained transformer model to analyze the content of an image and produce a descriptive caption. 
-#### Prerequisites
-- Transformers library by Hugging Face
+Generate descriptive caption for non-text image using Transformer model 
 
-#### Data Collection
-- Non-text images collected from existing PDF with manual captioning: [Caraaaaa/non_text_image_captioning](https://huggingface.co/datasets/Caraaaaa/non_text_image_captioning) 
+|     Non-text image     |  Caption   |
+| ------------------- | ----------------- |
+| ![](resources/non_text_image_2.jpg) | Indication of correct signature| 
 
-#### Model Training
-- [Google Colab](https://colab.research.google.com/drive/1QYvXdi0V1AXqlBMR8MpyydNMnK_Vt4dU?usp=sharing)
-- [Trained Model](https://huggingface.co/Caraaaaa/text_image_captioning)
+#### Fine-tuned a Transformer model
+- **Data:**
+    - Non-text images extracted from PDF
+    - Captioned Manually
+    - [Dataset card](https://huggingface.co/datasets/Caraaaaa/non_text_image_captioning) 
+
+- **Model:** 
+    - [GenerativeImage2Text](https://huggingface.co/microsoft/git-base) 
+    - [Fined-tuned model and inference API](https://huggingface.co/Caraaaaa/text_image_captioning)
+- **Training Script:** [Google Colab](https://colab.research.google.com/drive/1QYvXdi0V1AXqlBMR8MpyydNMnK_Vt4dU?usp=sharing)
 
 <details>
   <summary>Usage Instruction</summary>
