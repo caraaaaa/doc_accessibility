@@ -22,12 +22,6 @@ Convert scanned PDF document to searchable format using **TesseractOCR**.
 
 **Intent:** To allow user read or extract the words using assistive technologies, or manipulate the PDF for accessibility.
 
-<style>
-td, th {
-   border: none!important;
-}
-</style>
-
 |     Scanned PDF     |  Searchable PDF   |
 | ------------------- | ----------------- |
 | ![](resources/before_OCR.png) | ![](resources/after_OCR.png)| 
