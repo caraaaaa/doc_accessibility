@@ -14,9 +14,9 @@ Here is a Python CLI tool designed to detect and address [WCAG](https://www.w3.o
 - [Text Alternatives for Non-text Content](#text-alternatives-for-non-text-content)
     - [Identify Non-text Content](#identify-non-text-content)
     - Generate Description for Non-text Content
-        - Classify image-of-text and non-text-image
-        - Image Captioning
-        - OCR
+        - [Classify image-of-text and non-text-image](#image-of-text-classifier)
+        - [Image Captioning](#image-captioning)
+        - [OCR](#ocr)
 - Text Representation
     - Line Space
     - Text Constrast
@@ -146,8 +146,9 @@ Generate descriptive caption for non-text image using Transformer model
     - [Dataset card](https://huggingface.co/datasets/Caraaaaa/non_text_image_captioning) 
 
 - **Model:** 
-    - [GenerativeImage2Text](https://huggingface.co/microsoft/git-base) 
-    - [Fined-tuned model and inference API](https://huggingface.co/Caraaaaa/text_image_captioning)
+    - Pre-trained: [GenerativeImage2Text](https://huggingface.co/microsoft/git-base) 
+    - Fined-tuned: [model card and inference API](https://huggingface.co/Caraaaaa/text_image_captioning)
+- **Tools:** HuggingFace Transformer, PyTorch
 - **Training Script:** [Google Colab](https://colab.research.google.com/drive/1QYvXdi0V1AXqlBMR8MpyydNMnK_Vt4dU?usp=sharing)
 
 <details>
@@ -158,29 +159,23 @@ python script/generate_caption.py <input_image_path>
 ```
 </details>
 
-## Text Representation - Text Constrast  
+## OCR
+*Part of [Text Alternatives for Non-text Content](#text-alternatives-for-non-text-content)*
+
+Provide text alternative for image-of-text
+<details>
+  <summary>Usage Instruction</summary>
+
+```
+python script/image_of_text.py [-h] [--show_score] input_pdf_path
+```
+</details>
+
+## Text Constrast  
 Identify low contrast text in a *searchable PDF*  using image segmentation and contrast ratio analysis
 
-#### Prerequisites
-- Transformers library by Hugging Face
-- A directory of .ttf font files for text generation `font`
 
-#### Data Collection
-Synthetic image of text with segmentation mask [Caraaaaa/synthetic_image_text](https://huggingface.co/datasets/Caraaaaa/synthetic_image_text) 
-
-To generate synthetic image of text:
-
-```
-python script/synthetic_text_seg.py --output_folder <output_image_directory> --font_folder <font_directory>
-```
-
-#### Model Training - Image Segmentation (Text)
-- [Google Colab](https://colab.research.google.com/drive/1_TSeRlUyB8-clkU3-rGBvxiUERcN78XT?usp=sharing)
-- [Trained Model](https://huggingface.co/Caraaaaa/image_segmentation_text)
-
-
-
-#### Inference
+#### Overview
 ```mermaid
 flowchart LR
     A[Extract Text Bounding Box]
@@ -189,8 +184,30 @@ flowchart LR
     D -->|Optional| E[Output PDF with Bounding Box]
 ```
 
+|     Image of Text     |  Predicted Text Segmentation   |
+| ------------------- | ----------------- |
+| ![](resources/image_of_text_2.png) | ![](resources/image_text_seg.png)| 
+
+#### Fine-tuned a Transformer model
+- **Data:** 
+    - Generate synthetic image of text with segmentation mask using Pillow
+    - [Dataset Card](https://huggingface.co/datasets/Caraaaaa/synthetic_image_text)
+- **Model:**
+    - Pre-trained: [SegFormer](https://huggingface.co/nvidia/mit-b0) 
+    - Fined-tuned: [model card and inference API](https://huggingface.co/Caraaaaa/image_segmentation_text)
+- **Tools:** HuggingFace Transformer, PyTorch
+- **Training Script:** [Google Colab](https://colab.research.google.com/drive/1_TSeRlUyB8-clkU3-rGBvxiUERcN78XT?usp=sharing)
+
+
 <details>
   <summary>Usage Instruction</summary>
+
+
+To generate synthetic image of text:
+
+```
+python script/synthetic_text_seg.py --output_folder <output_image_directory> --font_folder <font_directory>
+```
 
 Basic usage:
 ```
@@ -210,7 +227,7 @@ python script/extract_text_bbox_PyMyPDF.py <input_pdf_path> [--output_pdf_path <
 ```
 </details>
 
-## Text Representation - Line Spacing
+## Line Spacing
 Analyze the line spacing in a *searchable PDF* and flags any discrepancies that might affect readability
 
 Basic usage:
