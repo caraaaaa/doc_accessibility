@@ -54,9 +54,9 @@ optional arguments:
 
 
 ## Text Alternatives for Non-text Content
-Provide descriptions for images inside *searchable PDF* using **image classification**, **image segmentation**, **transformer model** and **OCR**.
+Provide descriptions for images inside *searchable PDF* using **image classification**, **transformer model** and **OCR**.
 
-**Criteria:** All non-text content (e.g. images, formulas) that is presented to the user has a [text alternative]((https://www.w3.org/WAI/WCAG22/Understanding/non-text-content#dfn-text-alternative)) that serves the equivalent purpose
+**Criteria:** All non-text content (e.g. images, formulas) that is presented to the user has a [text alternative](https://www.w3.org/WAI/WCAG22/Understanding/non-text-content#dfn-text-alternative) that serves the equivalent purpose
 
 **WACG guideline:** [1.1](https://www.w3.org/WAI/WCAG22/Understanding/text-alternatives)
 
@@ -131,8 +131,12 @@ Classifiy if an image (such as JPG or PNG) primarily contains text before perfor
 <details>
   <summary>Usage Instruction</summary>
 
-```Shell
+```PowerShell
 python script/image_of_text.py [--show_score] input_pdf_path
+```
+```PowerShell
+Optional arguments:
+  --show_score    Show the classification score
 ```
 </details>
 
@@ -174,7 +178,7 @@ Extract text from image-of-text using OCR
   <summary>Usage Instruction</summary>
 
 ```
-python script/image_of_text.py [-h] [--show_score] input_pdf_path
+python script/image_of_text.py input_pdf_path
 ```
 </details>
 
@@ -214,12 +218,13 @@ flowchart LR
 - <ins>Luminance (brightness) of the colors:</ins>
 
 $$L = 0.2126*R+0.7152*G+0.0722*B$$ 
-$$\text{\footnotesize where R, G, and B are normalized to 0-1}$$
+$$\text{where R, G, and B are normalized to 0-1}$$
+$$\scriptsize Hello!$$
 
 - <ins>Contrast Ratio</ins>
 
 $$\frac{L2+0.05}{L1+0.05}$$
-$$\text{\footnotesize where L1 is the luminance of the lighter color (either text or background)}$$
+$$\text{where L1 is the luminance of the lighter color (either text or background)}$$
 
 
 <details>
