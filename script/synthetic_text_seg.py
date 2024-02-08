@@ -13,6 +13,7 @@ output_dir = 'image_of_text'
 font_dir = 'font'
 
 parser = argparse.ArgumentParser(description="Generate synthetic image of text with segmentation mask.")
+parser.add_argument('--sample_no', type=int, help="Number of sample to generate", default=50)
 parser.add_argument('--output_folder', type=str, help="The directory for the output images.", default=output_dir)
 parser.add_argument('--font_folder', type=str, help="The directory for fonts", default=font_dir)
 
@@ -100,8 +101,14 @@ def create_random_text_image(index, output_dir, font_list):
     """
     # Set random font size and path
     font_size = random.randint(30, 50)
-    font_path = random.choice(font_list)
-    font = ImageFont.truetype(font_path, font_size)
+    while True:
+        try:
+            font_path = random.choice(font_list)
+            font = ImageFont.truetype(font_path, font_size)
+            break
+        except:
+            pass
+        print("OSError: unknown file format:", font_path)
 
     # Generate random text
     text = random_text()
@@ -147,5 +154,5 @@ if __name__ == "__main__":
 
     print(f"Generating synthethic images of text to directory {os.path.abspath(args.output_folder)}")
     
-    for index in range(50):
+    for index in range(args.sample_no):
         create_random_text_image(index, args.output_folder, font_list)

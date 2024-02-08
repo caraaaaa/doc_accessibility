@@ -1,7 +1,7 @@
 import fitz
 import pytesseract
 from pdf2image import convert_from_path
-from PyPDF2 import PdfFileReader, PdfFileWriter
+from PyPDF2 import PdfReader, PdfWriter
 from pdfminer.high_level import extract_pages
 from pdfminer.layout import LTTextContainer, LTChar, LTAnno
 import io
@@ -46,15 +46,15 @@ def create_searchable_pdf(input_pdf_path, output_pdf_path):
     """
     # Convert PDF to images
     images = convert_from_path(input_pdf_path)
-    pdf_writer = PdfFileWriter()
+    pdf_writer = PdfWriter()
 
     # Process each image/page
     for image in images:
         # Convert image to PDF using OCR
         page = pytesseract.image_to_pdf_or_hocr(image, extension='pdf')
-        pdf = PdfFileReader(io.BytesIO(page))
+        pdf = PdfReader(io.BytesIO(page))
         # Add OCR-processed page to PDF writer
-        pdf_writer.addPage(pdf.getPage(0))
+        pdf_writer.add_page(pdf.pages[0])
 
     # Save the new searchable PDF
     with open(output_pdf_path, "wb") as f:

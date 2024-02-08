@@ -92,6 +92,8 @@ optional arguments:
                         The path for the output PDF file with bounding box.
   --captioning          Generate caption for images.
 ```
+Default output folder: `pdf_image` 
+Default output pdf path: `image_bbox.pdf` 
 </details>
 
 
@@ -111,7 +113,7 @@ Identify images which without alternative text using **PyMuPDF** and **Pillow**.
 ```PowerShell
 python script/extract_PDF_image.py --draw_bbox input_pdf_path
 ```
-Default output path: `bbox_image.pdf` 
+Default output path: `image_bbox.pdf` 
 </details>
 
 ## Image of Text Classifier 
@@ -236,8 +238,11 @@ $$\small\text{where L1 is the luminance of the lighter color, either text or bac
 
 - Generate synthetic image of text
 ```PowerShell
-python script/synthetic_text_seg.py [--output_folder OUTPUT_FOLDER] [--font_folder FONT_FOLDER]
+usage: synthetic_text_seg.py [--sample_no SAMPLE_NO] [--output_folder OUTPUT_FOLDER] [--font_folder FONT_FOLDER]
 ```
+Default output folder: `image_of_text`
+
+Default font input folder: `font` 
 - Identify low contrast text
 ```PowerShell
 python script/contrast_pdf.py [--output_bbox_img] [--output_dir OUTPUT_DIR] [--draw_bbox] [--output_pdf_path OUTPUT_PDF_PATH] [--bbox_extractor {PyMyPDF,pdfminer}] input_pdf_path
@@ -253,6 +258,10 @@ optional arguments:
   --bbox_extractor {PyMyPDF,pdfminer}
                         Choice of bounding box extractor.
 ```
+Default output folder: `segmentation_model_output`
+
+Default output path with bounding box: `bbox_low_contrast.pdf` 
+
 - Extract text bounding boxes (PDFMiner)
 ```PowerShell
 python script/extract_text_bbox_PDFminer.py [--output_pdf_path OUTPUT_PDF_PATH] input_pdf_path

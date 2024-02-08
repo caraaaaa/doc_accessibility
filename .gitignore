@@ -5,7 +5,7 @@
 *.csv
 
 non_text_image/*
-sample_image/*
+sample_image_of_text/*
 sample_pdf/*
 Machine Learning Engineer Challenge.pdf
 script/pushhf_dataset.py

@@ -3,10 +3,10 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - python=3.11
+  - python=3.12.1
+  - poppler=24.02.0
   - pip:
       - fastai==2.7.14
-      - fitz==0.0.1.dev2
       - langdetect==1.0.9
       - numpy==1.26.4
       - opencv-python==4.9.0.80
@@ -19,3 +19,5 @@ dependencies:
       - scipy==1.12.0
       - torch==2.2.0
       - transformers==4.37.2
+      - pymupdf==1.23.21
+      - ipywidgets==8.1.2
