@@ -216,10 +216,15 @@ flowchart LR
 
 #### Calculate the [contrast ratio](https://www.w3.org/WAI/WCAG21/Techniques/general/G18.html#procedure)
 - <ins>Luminance (brightness) of the colors:</ins>
-$$ L = 0.2126*R+0.7152*G+0.0722*B $$ 
+
+$$L = 0.2126\times R+0.7152\times G+0.0722\times B$$
+
+$$\small\text{where R, G, and B are normalized to 0-1}$$
 
 - <ins>Contrast Ratio</ins>
 $$\frac{L2+0.05}{L1+0.05}$$
+
+$$\small\text{where L1 is the luminance of the lighter color, either text or background}$$
 
 
 <details>
