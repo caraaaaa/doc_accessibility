@@ -1,0 +1,19 @@
+name: doc_accessibility_cli
+channels:
+  - conda-forge
+  - pytorch
+dependencies:
+  - numpy
+  - pillow
+  - scipy
+  - fitz
+  - opencv-python
+  - pdfminer
+  - pdf2image
+  - PyPDF2
+  - pytesseract
+  - langdetect
+  - fastai
+  - transformers
+  - pytorch
+  - torchvision

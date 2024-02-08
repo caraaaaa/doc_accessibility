@@ -6,8 +6,12 @@ Document accessibility ensures equal access to information for everyone, regardl
 
 Here is a Python CLI tool designed to detect and address [WCAG](https://www.w3.org/WAI/standards-guidelines/wcag/) accessibility issues identified in offline documents, targeting PDF. It aims to promote a user-friendly experience for everyone and enables users to access documents with [assistive technology](https://www.w3.org/WAI/WCAG22/Understanding/text-spacing.html#dfn-assistive-technology).
 
-## Installation (TODO)
-...
+## Installation
+```
+git clone https://github.com/caraaaaa/doc_accessibility.git
+conda env create -f env/environment.yml
+conda activate doc_accessibility_cli
+```
 
 ## Features
 - [Searchable PDF Creator](#searchable-pdf-creator)
@@ -173,7 +177,7 @@ python script/generate_caption.py <input_image_path>
 ## OCR
 *Part of [Text Alternatives for Non-text Content](#text-alternatives-for-non-text-content)*
 
-Extract text from image-of-text using OCR
+Extract text from image-of-text using **TesseractOCR**
 <details>
   <summary>Usage Instruction</summary>
 

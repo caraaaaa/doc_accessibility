@@ -8,3 +8,4 @@ non_text_image/*
 sample_image/*
 sample_pdf/*
 Machine Learning Engineer Challenge.pdf
+script/pushhf_dataset.py
