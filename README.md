@@ -26,7 +26,9 @@ Here is a Python CLI tool designed to detect and address [WCAG](https://www.w3.o
 ## Searchable PDF Creator
 Convert scanned PDF document to searchable format using **TesseractOCR**.
 
-**Intent:** To allow user read or extract the words using assistive technologies, or manipulate the PDF for accessibility. [More detail](https://www.w3.org/WAI/WCAG22/Understanding/images-of-text)
+**Criteria:** User can read or extract the words using assistive technologies, or manipulate the PDF for accessibility. 
+
+**WACG guideline:** [1.4.5](https://www.w3.org/WAI/WCAG22/Understanding/images-of-text)
 
 |     Scanned PDF     |  Searchable PDF   |
 | ------------------- | ----------------- |
@@ -52,7 +54,11 @@ optional arguments:
 
 
 ## Text Alternatives for Non-text Content
-Provide alternative descriptions for images, formulas, and other items that do not translate naturally into text. [More detail](https://www.w3.org/WAI/WCAG22/Understanding/text-alternatives)
+Provide descriptions for images inside *searchable PDF* using **image classification**, **image segmentation**, **transformer model** and **OCR**.
+
+**Criteria:** All non-text content (e.g. images, formulas) that is presented to the user has a [text alternative]((https://www.w3.org/WAI/WCAG22/Understanding/non-text-content#dfn-text-alternative)) that serves the equivalent purpose
+
+**WACG guideline:** [1.1](https://www.w3.org/WAI/WCAG22/Understanding/text-alternatives)
 
 **Overview**
 ```mermaid
@@ -89,7 +95,7 @@ optional arguments:
 ## Identify Non-text Content
 *Part of [Text Alternatives for Non-text Content](#text-alternatives-for-non-text-content)*
 
-Identify images without [alt text](https://www.w3.org/WAI/WCAG22/Understanding/non-text-content#dfn-text-alternative) inside searchable PDF using **PyMuPDF** and **Pillow**.
+Identify images which without alternative text using **PyMuPDF** and **Pillow**.
 
 
 | ![](resources/pdf_image.png) | ![](resources/pdf_image_bbox.png)| 
@@ -121,6 +127,7 @@ Classifiy if an image (such as JPG or PNG) primarily contains text before perfor
 - **Training Script:** [Google Colab](https://colab.research.google.com/drive/18ZZ99ZtyYH6SVsqaDlc3w9VwFjjC7aoE?usp=sharing)
 
 
+
 <details>
   <summary>Usage Instruction</summary>
 
@@ -133,7 +140,7 @@ python script/image_of_text.py [--show_score] input_pdf_path
 ## Image Captioning
 *Part of [Text Alternatives for Non-text Content](#text-alternatives-for-non-text-content)*
 
-Generate descriptive caption for non-text image using Transformer model 
+Generate descriptive caption for non-text image using Transformer model.
 
 |     Non-text image     |  Caption   |
 | ------------------- | ----------------- |
@@ -162,7 +169,7 @@ python script/generate_caption.py <input_image_path>
 ## OCR
 *Part of [Text Alternatives for Non-text Content](#text-alternatives-for-non-text-content)*
 
-Provide text alternative for image-of-text
+Extract text from image-of-text using OCR
 <details>
   <summary>Usage Instruction</summary>
 
@@ -172,7 +179,11 @@ python script/image_of_text.py [-h] [--show_score] input_pdf_path
 </details>
 
 ## Text Constrast  
-Identify low contrast text in a *searchable PDF*  using image segmentation and contrast ratio analysis
+Identify low contrast text inside PDF using **image segmentation** and **contrast ratio analysis**.
+
+**Criteria:** The visual presentation of text and images of text has a contrast ratio of at least 4.5:1
+
+**WACG guideline:** [1.4.3](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html)
 
 
 #### Overview
@@ -197,6 +208,18 @@ flowchart LR
     - Fined-tuned: [model card](https://huggingface.co/Caraaaaa/image_segmentation_text)
 - **Tools:** HuggingFace Transformer, PyTorch
 - **Training Script:** [Google Colab](https://colab.research.google.com/drive/1_TSeRlUyB8-clkU3-rGBvxiUERcN78XT?usp=sharing)
+
+
+#### Calculate the [contrast ratio](https://www.w3.org/WAI/WCAG21/Techniques/general/G18.html#procedure)
+- <ins>Luminance (brightness) of the colors:</ins>
+
+$$L = 0.2126*R+0.7152*G+0.0722*B$$ 
+$$\text{\footnotesize where R, G, and B are normalized to 0-1}$$
+
+- <ins>Contrast Ratio</ins>
+
+$$\frac{L2+0.05}{L1+0.05}$$
+$$\text{\footnotesize where L1 is the luminance of the lighter color (either text or background)}$$
 
 
 <details>
@@ -232,7 +255,12 @@ python script/extract_text_bbox_PyMuPDF.py [--output_pdf_path OUTPUT_PDF_PATH] [
 </details>
 
 ## Line Spacing
-Analyze the line spacing in a *searchable PDF* and flags any discrepancies that might affect readability
+Analyze the line spacing using **PDFminer**
+
+**Criteria:** Line height (line spacing) to at least 1.5 times the font size
+
+
+**WACG guideline:** [1.4.12](https://www.w3.org/WAI/WCAG22/Understanding/text-spacing.html)
 
 <details>
   <summary>Usage Instruction</summary>
@@ -246,20 +274,20 @@ python script/line_spacing.py input_pdf_path
 
 - **Images**: non-text image (i.e. icon, header), image of text
 - **Text Presentation**: line spacing, text-background contrast
-- **Language**: language of page, language of parts
+-  <details>
+    <summary>Language: language of page, language of parts</summary>
 
-<details>
-  <summary>Other features</summary>
+    ## PDF Language Detection
+    Examines the PDF's metadata for a specified language property using **Langdetect** and **PyMuPDF**.
 
-## PDF Language Detection
-- **Metadata Language Check**: Examines the PDF's metadata for a specified language property.
-- **Text-Based Language Detection**: Analyzes the text on each page to detect its language.
-- **Support for Multi-Language Documents**: Identifies cases where multiple languages are present in the same document.
-#### Prerequisites
-- Langdetect library
+    **Criteria:** Assistive technology can determine the language of a page
 
-Basic usage:
-```
-python script/language_detection.py <input_pdf_path>
-```
-</details>
+    **WACG guideline:** [3.1.1](https://www.w3.org/WAI/WCAG22/Understanding/language-of-page.html), [3.1.2](https://www.w3.org/WAI/WCAG22/Understanding/language-of-parts.html)
+
+
+
+    Basic usage:
+    ```
+    python script/language_detection.py input_pdf_path
+    ```
+    </details>
