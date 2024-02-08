@@ -205,9 +205,9 @@ flowchart LR
     D -->|Optional| E[Output PDF with Bounding Box]
 ```
 
-|     Image of Text     |  Predicted Text Segmentation   |
-| ------------------- | ----------------- |
-| ![](resources/image_of_text_2.png) | ![](resources/image_text_seg.png)| 
+|     Image of Text     |  Predicted Text Segmentation   |     Enought Constrast     |  Low Contrast   |
+| ------------------- | ----------------- | ------------------- | ----------------- |
+| ![](resources/image_of_text_2.png) | ![](resources/image_text_seg.png)| ![](resources/bbox_low_contrast_2.jpg) | ![](resources/bbox_low_contrast.jpg)| 
 
 #### Fine-tuned a Transformer model
 - **Data:** 
@@ -238,7 +238,7 @@ $$\small\text{where L1 is the luminance of the lighter color, either text or bac
 
 - Generate synthetic image of text
 ```PowerShell
-usage: synthetic_text_seg.py [--sample_no SAMPLE_NO] [--output_folder OUTPUT_FOLDER] [--font_folder FONT_FOLDER]
+python script/synthetic_text_seg.py [--sample_no SAMPLE_NO] [--output_folder OUTPUT_FOLDER] [--font_folder FONT_FOLDER]
 ```
 Default output folder: `image_of_text`
 
